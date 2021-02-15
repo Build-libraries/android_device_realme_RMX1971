@@ -8,12 +8,19 @@
 include device/realme/sdm710-common/BoardConfigCommon.mk
 
 DEVICE_PATH := device/realme/RMX1971
+LOCAL_KERNEL_PATH := device/realme/RMX1971-kernel
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := RMX1971,RMX1971CN
 
 # Kernel
+TARGET_PREBUILT_KERNEL := $(LOCAL_KERNEL_PATH)/kernel
+TARGET_PREBUILT_DTBOIMAGE := $(LOCAL_KERNEL_PATH)/dtbo.img
+ifneq ($(TARGET_PREBUILT_KERNEL),)
+PRODUCT_VENDOR_KERNEL_HEADERS := $(LOCAL_KERNEL_PATH)/sdm710/kernel-headers
+else
 TARGET_KERNEL_CONFIG := RMX1971_defconfig
+endif
 
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 
